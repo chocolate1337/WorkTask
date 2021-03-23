@@ -1,7 +1,7 @@
 import argparse, os, csv
 from typing import List, Dict
 
-columns = {'open': 0, 'high': 0, 'low': 0, 'close': 0}
+columns = {'open': 0.0, 'high': 0.0, 'low': 0.0, 'close': 0.0}
 DEFAULT_PATH = os.path.normpath(os.path.dirname(__file__))
 
 parser = argparse.ArgumentParser(description='-p путь с csv файлами; -n имя колонки которое должно совпадать')
