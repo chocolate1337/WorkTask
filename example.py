@@ -51,7 +51,11 @@ def csv_average_reader() -> Dict[str, float]:
                     columns['low'] += float(row['low'])
                     columns['close'] += float(row['close'])
     for key in columns.keys():
-        columns[key] = float('{:.3f}'.format(columns[key] / length))
+        try:
+            columns[key] = float('{:.3f}'.format(columns[key] / length))
+        except ZeroDivisionError:
+            print('Отсутствуют значениe:' + args.name, 'в колонке Name')
+            return columns
     return columns
 
 
