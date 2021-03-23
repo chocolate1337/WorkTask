@@ -16,6 +16,24 @@ path = args.paths
 names = args.name
 
 
+def get_file_list(path: str) -> List[str]:
+    """
+    список файлов
+    :param path:
+    :return list:
+    """
+    paths = []
+    for root, dirs, files in os.walk(path):
+        for filename in files:
+            if filename.endswith('.csv'):
+                paths.append(os.path.normpath(os.path.join(root, filename)))
+
+    if len(paths) == 0:
+        raise Exception('Отсутствуют csv файлы, проверьте наличие файлов в каталоге')
+
+    return paths
+
+
 def csv_average_reader() -> Dict[str, float]:
     """
     Среднее значение csv файлов
@@ -35,24 +53,6 @@ def csv_average_reader() -> Dict[str, float]:
     for key in columns.keys():
         columns[key] = float('{:.3f}'.format(columns[key] / length))
     return columns
-
-
-def get_file_list(path: str) -> List[str]:
-    """
-    список файлов
-    :param path:
-    :return list:
-    """
-    paths = []
-    for root, dirs, files in os.walk(path):
-        for filename in files:
-            if filename.endswith('.csv'):
-                paths.append(os.path.normpath(os.path.join(root, filename)))
-
-    if len(paths) == 0:
-        raise Exception('Отсутствуют csv файлы, проверьте наличие файлов в каталоге')
-
-    return paths
 
 
 if __name__ == '__main__':
